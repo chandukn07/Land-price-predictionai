@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="houseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7C3AED;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6D28D9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chartGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34D399;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#houseGradient)"/>
+  
+  <!-- House roof -->
+  <path d="M32 12 L50 26 L46 26 L46 48 L18 48 L18 26 L14 26 Z" fill="white" opacity="0.95"/>
+  
+  <!-- House body -->
+  <rect x="20" y="28" width="24" height="20" fill="white" opacity="0.9"/>
+  
+  <!-- Door -->
+  <rect x="28" y="36" width="8" height="12" rx="1" fill="url(#houseGradient)"/>
+  
+  <!-- Window left -->
+  <rect x="23" y="32" width="6" height="6" rx="1" fill="#7C3AED" opacity="0.7"/>
+  
+  <!-- Window right -->
+  <rect x="35" y="32" width="6" height="6" rx="1" fill="#7C3AED" opacity="0.7"/>
+  
+  <!-- Chart bars (representing price prediction) -->
+  <rect x="48" y="44" width="3" height="8" rx="1" fill="url(#chartGradient)"/>
+  <rect x="52" y="40" width="3" height="12" rx="1" fill="url(#chartGradient)"/>
+  <rect x="56" y="36" width="3" height="16" rx="1" fill="url(#chartGradient)"/>
+</svg>

@@ -1,0 +1,187 @@
+from flask import Blueprint, request, jsonify
+from database import supabase
+from models.ml_models import ModelTrainer
+from models.shap_analyzer import ShapAnalyzer
+import numpy as np
+import traceback
+
+shap_bp = Blueprint('shap', __name__)
+
+FEATURE_COLUMNS = [
+    'building_density',
+    'population_density',
+    'avg_building_height',
+    'commercial_ratio',
+    'residential_ratio',
+    'distance_to_station',
+    'distance_to_highway',
+    'distance_to_city_center',
+    'school_count',
+    'hospital_count',
+    'park_area',
+    'road_density',
+    'public_transport_access',
+    'crime_rate',
+    'employment_rate'
+]
+
+@shap_bp.route('/analyze', methods=['POST'])
+def analyze_shap():
+    """
+    Calculate SHAP values for specific samples
+    
+    Expected JSON:
+    {
+        "model_run_id": "uuid",
+        "features": [
+            {
+                "grid_cell_id": "A1",
+                "assessment_date": "2024-01-01",
+                "building_density": 0.5,
+                ...
+            }
+        ]
+    }
+    """
+    try:
+        data = request.get_json()
+        
+        model_run_id = data.get('model_run_id')
+        features_data = data.get('features', [])
+        
+        if not model_run_id or not features_data:
+            return jsonify({'error': 'Missing required parameters'}), 400
+        
+        # Get model info
+        model_run_response = supabase.table('model_runs').select('*').eq('id', model_run_id).single().execute()
+        model_run = model_run_response.data
+        
+        if model_run['status'] != 'completed':
+            return jsonify({'error': 'Model training not completed'}), 400
+        
+        # Load trained model
+        trainer = ModelTrainer.load_model(model_run_id, model_run['model_type'])
+        
+        # Prepare features
+        X, grid_cell_ids, dates = prepare_feature_data(features_data)
+        
+        if len(X) == 0:
+            return jsonify({'error': 'No valid features provided'}), 400
+        
+        # Create background dataset (use sample from features)
+        background_size = min(100, len(X))
+        X_background = X[:background_size]
+        
+        # Calculate SHAP values
+        analyzer = ShapAnalyzer(trainer, X_background)
+        shap_values = analyzer.calculate_shap_values(X)
+        
+        # Prepare results
+        results = []
+        for idx, (grid_id, date) in enumerate(zip(grid_cell_ids, dates)):
+            feature_shap_values = {}
+            for feat_idx, feature_name in enumerate(FEATURE_COLUMNS):
+                feature_shap_values[feature_name] = float(shap_values[idx][feat_idx])
+            
+            results.append({
+                'grid_cell_id': grid_id,
+                'assessment_date': date,
+                'shap_values': feature_shap_values
+            })
+        
+        # Get feature importance
+        importance = analyzer.get_feature_importance(shap_values)
+        
+        return jsonify({
+            'model_run_id': model_run_id,
+            'shap_analysis': results,
+            'feature_importance': importance
+        }), 200
+        
+    except Exception as e:
+        print(f"SHAP analysis error: {str(e)}")
+        print(traceback.format_exc())
+        return jsonify({'error': str(e)}), 500
+
+
+@shap_bp.route('/importance/<model_run_id>', methods=['GET'])
+def get_feature_importance(model_run_id):
+    """Get aggregated feature importance from stored SHAP values"""
+    try:
+        # Fetch SHAP values from database
+        shap_response = supabase.table('shap_values').select('*').eq('model_run_id', model_run_id).execute()
+        shap_data = shap_response.data
+        
+        if not shap_data:
+            return jsonify({'error': 'No SHAP values found for this model run'}), 404
+        
+        # Aggregate by feature
+        feature_map = {}
+        for record in shap_data:
+            feature_name = record['feature_name']
+            shap_value = abs(record['shap_value'])
+            
+            if feature_name not in feature_map:
+                feature_map[feature_name] = {
+                    'sum': 0,
+                    'count': 0
+                }
+            
+            feature_map[feature_name]['sum'] += shap_value
+            feature_map[feature_name]['count'] += 1
+        
+        # Calculate average importance
+        importance_list = []
+        for feature_name, stats in feature_map.items():
+            importance_list.append({
+                'feature_name': feature_name,
+                'avg_importance': stats['sum'] / stats['count'],
+                'sample_count': stats['count']
+            })
+        
+        # Sort by importance
+        importance_list.sort(key=lambda x: x['avg_importance'], reverse=True)
+        
+        # Add ranks
+        for rank, item in enumerate(importance_list, 1):
+            item['rank'] = rank
+        
+        return jsonify({
+            'model_run_id': model_run_id,
+            'feature_importance': importance_list
+        }), 200
+        
+    except Exception as e:
+        print(f"Feature importance error: {str(e)}")
+        print(traceback.format_exc())
+        return jsonify({'error': str(e)}), 500
+
+
+def prepare_feature_data(features_data):
+    """Prepare feature data from records"""
+    X_list = []
+    grid_cell_ids = []
+    dates = []
+    
+    for feature_record in features_data:
+        # Extract features
+        feature_vector = []
+        valid = True
+        
+        for col in FEATURE_COLUMNS:
+            value = feature_record.get(col)
+            if value is None:
+                valid = False
+                break
+            feature_vector.append(float(value))
+        
+        if valid and len(feature_vector) == len(FEATURE_COLUMNS):
+            X_list.append(feature_vector)
+            grid_cell_ids.append(feature_record.get('grid_cell_id', 'unknown'))
+            dates.append(feature_record.get('assessment_date', ''))
+    
+    return (
+        np.array(X_list),
+        grid_cell_ids,
+        dates
+    )

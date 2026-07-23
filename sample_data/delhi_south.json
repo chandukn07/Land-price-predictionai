@@ -1,0 +1,126 @@
+{
+  "features": [
+    {
+      "grid_cell_id": "DEL_SOU_001",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.78,
+      "population_density": 28000,
+      "avg_building_height": 38.0,
+      "commercial_ratio": 0.55,
+      "residential_ratio": 0.45,
+      "distance_to_station": 0.3,
+      "distance_to_highway": 0.8,
+      "distance_to_city_center": 2.5,
+      "school_count": 8,
+      "hospital_count": 6,
+      "park_area": 1500.0,
+      "road_density": 0.85,
+      "public_transport_access": 0.92,
+      "crime_rate": 0.042,
+      "employment_rate": 0.94
+    },
+    {
+      "grid_cell_id": "DEL_SOU_002",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.82,
+      "population_density": 30000,
+      "avg_building_height": 42.0,
+      "commercial_ratio": 0.62,
+      "residential_ratio": 0.38,
+      "distance_to_station": 0.2,
+      "distance_to_highway": 0.6,
+      "distance_to_city_center": 2.0,
+      "school_count": 7,
+      "hospital_count": 7,
+      "park_area": 1200.0,
+      "road_density": 0.88,
+      "public_transport_access": 0.95,
+      "crime_rate": 0.045,
+      "employment_rate": 0.95
+    },
+    {
+      "grid_cell_id": "DEL_SOU_003",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.75,
+      "population_density": 26000,
+      "avg_building_height": 35.0,
+      "commercial_ratio": 0.5,
+      "residential_ratio": 0.5,
+      "distance_to_station": 0.35,
+      "distance_to_highway": 1.0,
+      "distance_to_city_center": 3.0,
+      "school_count": 9,
+      "hospital_count": 5,
+      "park_area": 1600.0,
+      "road_density": 0.82,
+      "public_transport_access": 0.9,
+      "crime_rate": 0.04,
+      "employment_rate": 0.93
+    },
+    {
+      "grid_cell_id": "DEL_SOU_004",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.8,
+      "population_density": 29000,
+      "avg_building_height": 40.0,
+      "commercial_ratio": 0.58,
+      "residential_ratio": 0.42,
+      "distance_to_station": 0.25,
+      "distance_to_highway": 0.7,
+      "distance_to_city_center": 2.2,
+      "school_count": 8,
+      "hospital_count": 6,
+      "park_area": 1300.0,
+      "road_density": 0.86,
+      "public_transport_access": 0.93,
+      "crime_rate": 0.043,
+      "employment_rate": 0.945
+    },
+    {
+      "grid_cell_id": "DEL_SOU_001",
+      "assessment_date": "2023-04-01",
+      "building_density": 0.79,
+      "population_density": 28200,
+      "avg_building_height": 38.5,
+      "commercial_ratio": 0.56,
+      "residential_ratio": 0.44,
+      "distance_to_station": 0.3,
+      "distance_to_highway": 0.8,
+      "distance_to_city_center": 2.5,
+      "school_count": 8,
+      "hospital_count": 6,
+      "park_area": 1500.0,
+      "road_density": 0.85,
+      "public_transport_access": 0.92,
+      "crime_rate": 0.043,
+      "employment_rate": 0.94
+    }
+  ],
+  "prices": [
+    {
+      "grid_cell_id": "DEL_SOU_001",
+      "assessment_date": "2023-01-01",
+      "price": 12500000
+    },
+    {
+      "grid_cell_id": "DEL_SOU_002",
+      "assessment_date": "2023-01-01",
+      "price": 15800000
+    },
+    {
+      "grid_cell_id": "DEL_SOU_003",
+      "assessment_date": "2023-01-01",
+      "price": 11200000
+    },
+    {
+      "grid_cell_id": "DEL_SOU_004",
+      "assessment_date": "2023-01-01",
+      "price": 14500000
+    },
+    {
+      "grid_cell_id": "DEL_SOU_001",
+      "assessment_date": "2023-04-01",
+      "price": 12900000
+    }
+  ]
+}

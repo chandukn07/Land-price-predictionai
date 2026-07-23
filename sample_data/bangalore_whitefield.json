@@ -1,0 +1,150 @@
+{
+  "features": [
+    {
+      "grid_cell_id": "BLR_WHI_001",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.7,
+      "population_density": 22000,
+      "avg_building_height": 30.0,
+      "commercial_ratio": 0.45,
+      "residential_ratio": 0.55,
+      "distance_to_station": 0.8,
+      "distance_to_highway": 2.0,
+      "distance_to_city_center": 12.0,
+      "school_count": 10,
+      "hospital_count": 8,
+      "park_area": 2000.0,
+      "road_density": 0.75,
+      "public_transport_access": 0.8,
+      "crime_rate": 0.025,
+      "employment_rate": 0.96
+    },
+    {
+      "grid_cell_id": "BLR_WHI_002",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.68,
+      "population_density": 20000,
+      "avg_building_height": 28.0,
+      "commercial_ratio": 0.4,
+      "residential_ratio": 0.6,
+      "distance_to_station": 1.0,
+      "distance_to_highway": 2.5,
+      "distance_to_city_center": 13.0,
+      "school_count": 12,
+      "hospital_count": 7,
+      "park_area": 2200.0,
+      "road_density": 0.72,
+      "public_transport_access": 0.78,
+      "crime_rate": 0.022,
+      "employment_rate": 0.95
+    },
+    {
+      "grid_cell_id": "BLR_WHI_003",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.72,
+      "population_density": 23000,
+      "avg_building_height": 32.0,
+      "commercial_ratio": 0.48,
+      "residential_ratio": 0.52,
+      "distance_to_station": 0.7,
+      "distance_to_highway": 1.8,
+      "distance_to_city_center": 11.5,
+      "school_count": 11,
+      "hospital_count": 9,
+      "park_area": 1900.0,
+      "road_density": 0.77,
+      "public_transport_access": 0.82,
+      "crime_rate": 0.028,
+      "employment_rate": 0.97
+    },
+    {
+      "grid_cell_id": "BLR_WHI_004",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.66,
+      "population_density": 19000,
+      "avg_building_height": 26.0,
+      "commercial_ratio": 0.38,
+      "residential_ratio": 0.62,
+      "distance_to_station": 1.1,
+      "distance_to_highway": 2.8,
+      "distance_to_city_center": 13.5,
+      "school_count": 13,
+      "hospital_count": 6,
+      "park_area": 2400.0,
+      "road_density": 0.7,
+      "public_transport_access": 0.75,
+      "crime_rate": 0.02,
+      "employment_rate": 0.94
+    },
+    {
+      "grid_cell_id": "BLR_WHI_005",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.74,
+      "population_density": 24000,
+      "avg_building_height": 34.0,
+      "commercial_ratio": 0.52,
+      "residential_ratio": 0.48,
+      "distance_to_station": 0.6,
+      "distance_to_highway": 1.5,
+      "distance_to_city_center": 11.0,
+      "school_count": 10,
+      "hospital_count": 8,
+      "park_area": 1800.0,
+      "road_density": 0.78,
+      "public_transport_access": 0.84,
+      "crime_rate": 0.03,
+      "employment_rate": 0.98
+    },
+    {
+      "grid_cell_id": "BLR_WHI_001",
+      "assessment_date": "2023-04-01",
+      "building_density": 0.71,
+      "population_density": 22200,
+      "avg_building_height": 30.5,
+      "commercial_ratio": 0.46,
+      "residential_ratio": 0.54,
+      "distance_to_station": 0.8,
+      "distance_to_highway": 2.0,
+      "distance_to_city_center": 12.0,
+      "school_count": 10,
+      "hospital_count": 8,
+      "park_area": 2000.0,
+      "road_density": 0.75,
+      "public_transport_access": 0.8,
+      "crime_rate": 0.026,
+      "employment_rate": 0.96
+    }
+  ],
+  "prices": [
+    {
+      "grid_cell_id": "BLR_WHI_001",
+      "assessment_date": "2023-01-01",
+      "price": 7500000
+    },
+    {
+      "grid_cell_id": "BLR_WHI_002",
+      "assessment_date": "2023-01-01",
+      "price": 6800000
+    },
+    {
+      "grid_cell_id": "BLR_WHI_003",
+      "assessment_date": "2023-01-01",
+      "price": 8200000
+    },
+    {
+      "grid_cell_id": "BLR_WHI_004",
+      "assessment_date": "2023-01-01",
+      "price": 6200000
+    },
+    {
+      "grid_cell_id": "BLR_WHI_005",
+      "assessment_date": "2023-01-01",
+      "price": 8900000
+    },
+    {
+      "grid_cell_id": "BLR_WHI_001",
+      "assessment_date": "2023-04-01",
+      "price": 7750000
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "features": [
+    {
+      "grid_cell_id": "HYD_HIT_001",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.72,
+      "population_density": 20000,
+      "avg_building_height": 35.0,
+      "commercial_ratio": 0.6,
+      "residential_ratio": 0.4,
+      "distance_to_station": 0.6,
+      "distance_to_highway": 1.5,
+      "distance_to_city_center": 10.0,
+      "school_count": 12,
+      "hospital_count": 10,
+      "park_area": 1800.0,
+      "road_density": 0.8,
+      "public_transport_access": 0.85,
+      "crime_rate": 0.022,
+      "employment_rate": 0.97
+    },
+    {
+      "grid_cell_id": "HYD_HIT_002",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.68,
+      "population_density": 18500,
+      "avg_building_height": 32.0,
+      "commercial_ratio": 0.55,
+      "residential_ratio": 0.45,
+      "distance_to_station": 0.7,
+      "distance_to_highway": 1.8,
+      "distance_to_city_center": 11.0,
+      "school_count": 11,
+      "hospital_count": 9,
+      "park_area": 2000.0,
+      "road_density": 0.78,
+      "public_transport_access": 0.83,
+      "crime_rate": 0.02,
+      "employment_rate": 0.96
+    },
+    {
+      "grid_cell_id": "HYD_HIT_003",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.75,
+      "population_density": 21000,
+      "avg_building_height": 38.0,
+      "commercial_ratio": 0.65,
+      "residential_ratio": 0.35,
+      "distance_to_station": 0.5,
+      "distance_to_highway": 1.2,
+      "distance_to_city_center": 9.5,
+      "school_count": 10,
+      "hospital_count": 11,
+      "park_area": 1600.0,
+      "road_density": 0.82,
+      "public_transport_access": 0.88,
+      "crime_rate": 0.025,
+      "employment_rate": 0.98
+    },
+    {
+      "grid_cell_id": "HYD_HIT_004",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.7,
+      "population_density": 19500,
+      "avg_building_height": 34.0,
+      "commercial_ratio": 0.58,
+      "residential_ratio": 0.42,
+      "distance_to_station": 0.65,
+      "distance_to_highway": 1.6,
+      "distance_to_city_center": 10.5,
+      "school_count": 13,
+      "hospital_count": 10,
+      "park_area": 1900.0,
+      "road_density": 0.79,
+      "public_transport_access": 0.84,
+      "crime_rate": 0.023,
+      "employment_rate": 0.97
+    },
+    {
+      "grid_cell_id": "HYD_HIT_001",
+      "assessment_date": "2023-04-01",
+      "building_density": 0.73,
+      "population_density": 20200,
+      "avg_building_height": 35.5,
+      "commercial_ratio": 0.61,
+      "residential_ratio": 0.39,
+      "distance_to_station": 0.6,
+      "distance_to_highway": 1.5,
+      "distance_to_city_center": 10.0,
+      "school_count": 12,
+      "hospital_count": 10,
+      "park_area": 1800.0,
+      "road_density": 0.8,
+      "public_transport_access": 0.85,
+      "crime_rate": 0.023,
+      "employment_rate": 0.97
+    }
+  ],
+  "prices": [
+    {
+      "grid_cell_id": "HYD_HIT_001",
+      "assessment_date": "2023-01-01",
+      "price": 9500000
+    },
+    {
+      "grid_cell_id": "HYD_HIT_002",
+      "assessment_date": "2023-01-01",
+      "price": 8800000
+    },
+    {
+      "grid_cell_id": "HYD_HIT_003",
+      "assessment_date": "2023-01-01",
+      "price": 10500000
+    },
+    {
+      "grid_cell_id": "HYD_HIT_004",
+      "assessment_date": "2023-01-01",
+      "price": 9200000
+    },
+    {
+      "grid_cell_id": "HYD_HIT_001",
+      "assessment_date": "2023-04-01",
+      "price": 9750000
+    }
+  ]
+}

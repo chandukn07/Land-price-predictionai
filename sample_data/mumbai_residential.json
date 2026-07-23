@@ -1,0 +1,174 @@
+{
+  "features": [
+    {
+      "grid_cell_id": "MUM_RES_001",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.62,
+      "population_density": 22000,
+      "avg_building_height": 20.0,
+      "commercial_ratio": 0.15,
+      "residential_ratio": 0.85,
+      "distance_to_station": 0.9,
+      "distance_to_highway": 2.5,
+      "distance_to_city_center": 6.0,
+      "school_count": 5,
+      "hospital_count": 3,
+      "park_area": 1800.0,
+      "road_density": 0.58,
+      "public_transport_access": 0.72,
+      "crime_rate": 0.04,
+      "employment_rate": 0.87
+    },
+    {
+      "grid_cell_id": "MUM_RES_002",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.58,
+      "population_density": 20000,
+      "avg_building_height": 18.0,
+      "commercial_ratio": 0.12,
+      "residential_ratio": 0.88,
+      "distance_to_station": 1.1,
+      "distance_to_highway": 3.0,
+      "distance_to_city_center": 7.0,
+      "school_count": 4,
+      "hospital_count": 2,
+      "park_area": 2000.0,
+      "road_density": 0.55,
+      "public_transport_access": 0.68,
+      "crime_rate": 0.035,
+      "employment_rate": 0.86
+    },
+    {
+      "grid_cell_id": "MUM_RES_003",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.65,
+      "population_density": 23500,
+      "avg_building_height": 22.0,
+      "commercial_ratio": 0.18,
+      "residential_ratio": 0.82,
+      "distance_to_station": 0.8,
+      "distance_to_highway": 2.2,
+      "distance_to_city_center": 5.5,
+      "school_count": 6,
+      "hospital_count": 3,
+      "park_area": 1600.0,
+      "road_density": 0.6,
+      "public_transport_access": 0.75,
+      "crime_rate": 0.042,
+      "employment_rate": 0.88
+    },
+    {
+      "grid_cell_id": "MUM_RES_004",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.6,
+      "population_density": 21000,
+      "avg_building_height": 19.0,
+      "commercial_ratio": 0.14,
+      "residential_ratio": 0.86,
+      "distance_to_station": 1.0,
+      "distance_to_highway": 2.8,
+      "distance_to_city_center": 6.5,
+      "school_count": 5,
+      "hospital_count": 2,
+      "park_area": 1900.0,
+      "road_density": 0.57,
+      "public_transport_access": 0.7,
+      "crime_rate": 0.038,
+      "employment_rate": 0.865
+    },
+    {
+      "grid_cell_id": "MUM_RES_005",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.56,
+      "population_density": 19000,
+      "avg_building_height": 16.0,
+      "commercial_ratio": 0.1,
+      "residential_ratio": 0.9,
+      "distance_to_station": 1.3,
+      "distance_to_highway": 3.5,
+      "distance_to_city_center": 8.0,
+      "school_count": 4,
+      "hospital_count": 2,
+      "park_area": 2200.0,
+      "road_density": 0.52,
+      "public_transport_access": 0.65,
+      "crime_rate": 0.03,
+      "employment_rate": 0.85
+    },
+    {
+      "grid_cell_id": "MUM_RES_006",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.64,
+      "population_density": 22500,
+      "avg_building_height": 21.0,
+      "commercial_ratio": 0.16,
+      "residential_ratio": 0.84,
+      "distance_to_station": 0.85,
+      "distance_to_highway": 2.4,
+      "distance_to_city_center": 5.8,
+      "school_count": 5,
+      "hospital_count": 3,
+      "park_area": 1700.0,
+      "road_density": 0.59,
+      "public_transport_access": 0.73,
+      "crime_rate": 0.041,
+      "employment_rate": 0.875
+    },
+    {
+      "grid_cell_id": "MUM_RES_001",
+      "assessment_date": "2023-04-01",
+      "building_density": 0.63,
+      "population_density": 22200,
+      "avg_building_height": 20.5,
+      "commercial_ratio": 0.16,
+      "residential_ratio": 0.84,
+      "distance_to_station": 0.9,
+      "distance_to_highway": 2.5,
+      "distance_to_city_center": 6.0,
+      "school_count": 5,
+      "hospital_count": 3,
+      "park_area": 1800.0,
+      "road_density": 0.58,
+      "public_transport_access": 0.72,
+      "crime_rate": 0.042,
+      "employment_rate": 0.87
+    }
+  ],
+  "prices": [
+    {
+      "grid_cell_id": "MUM_RES_001",
+      "assessment_date": "2023-01-01",
+      "price": 680000
+    },
+    {
+      "grid_cell_id": "MUM_RES_002",
+      "assessment_date": "2023-01-01",
+      "price": 620000
+    },
+    {
+      "grid_cell_id": "MUM_RES_003",
+      "assessment_date": "2023-01-01",
+      "price": 720000
+    },
+    {
+      "grid_cell_id": "MUM_RES_004",
+      "assessment_date": "2023-01-01",
+      "price": 650000
+    },
+    {
+      "grid_cell_id": "MUM_RES_005",
+      "assessment_date": "2023-01-01",
+      "price": 590000
+    },
+    {
+      "grid_cell_id": "MUM_RES_006",
+      "assessment_date": "2023-01-01",
+      "price": 700000
+    },
+    {
+      "grid_cell_id": "MUM_RES_001",
+      "assessment_date": "2023-04-01",
+      "price": 695000
+    }
+  ]
+}

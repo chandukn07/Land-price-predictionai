@@ -1,0 +1,126 @@
+{
+  "features": [
+    {
+      "grid_cell_id": "TOKYO_001",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.75,
+      "population_density": 15000,
+      "avg_building_height": 25.5,
+      "commercial_ratio": 0.3,
+      "residential_ratio": 0.7,
+      "distance_to_station": 0.5,
+      "distance_to_highway": 2.0,
+      "distance_to_city_center": 5.0,
+      "school_count": 3,
+      "hospital_count": 2,
+      "park_area": 1000.0,
+      "road_density": 0.6,
+      "public_transport_access": 0.8,
+      "crime_rate": 0.05,
+      "employment_rate": 0.92
+    },
+    {
+      "grid_cell_id": "TOKYO_002",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.65,
+      "population_density": 12000,
+      "avg_building_height": 22.0,
+      "commercial_ratio": 0.2,
+      "residential_ratio": 0.8,
+      "distance_to_station": 1.0,
+      "distance_to_highway": 3.5,
+      "distance_to_city_center": 7.5,
+      "school_count": 2,
+      "hospital_count": 1,
+      "park_area": 1500.0,
+      "road_density": 0.5,
+      "public_transport_access": 0.7,
+      "crime_rate": 0.03,
+      "employment_rate": 0.90
+    },
+    {
+      "grid_cell_id": "TOKYO_003",
+      "assessment_date": "2023-01-01",
+      "building_density": 0.85,
+      "population_density": 18000,
+      "avg_building_height": 30.0,
+      "commercial_ratio": 0.5,
+      "residential_ratio": 0.5,
+      "distance_to_station": 0.2,
+      "distance_to_highway": 1.0,
+      "distance_to_city_center": 2.0,
+      "school_count": 5,
+      "hospital_count": 3,
+      "park_area": 500.0,
+      "road_density": 0.8,
+      "public_transport_access": 0.95,
+      "crime_rate": 0.08,
+      "employment_rate": 0.95
+    },
+    {
+      "grid_cell_id": "TOKYO_001",
+      "assessment_date": "2023-04-01",
+      "building_density": 0.76,
+      "population_density": 15200,
+      "avg_building_height": 25.8,
+      "commercial_ratio": 0.31,
+      "residential_ratio": 0.69,
+      "distance_to_station": 0.5,
+      "distance_to_highway": 2.0,
+      "distance_to_city_center": 5.0,
+      "school_count": 3,
+      "hospital_count": 2,
+      "park_area": 1000.0,
+      "road_density": 0.6,
+      "public_transport_access": 0.8,
+      "crime_rate": 0.05,
+      "employment_rate": 0.92
+    },
+    {
+      "grid_cell_id": "TOKYO_002",
+      "assessment_date": "2023-04-01",
+      "building_density": 0.66,
+      "population_density": 12100,
+      "avg_building_height": 22.2,
+      "commercial_ratio": 0.21,
+      "residential_ratio": 0.79,
+      "distance_to_station": 1.0,
+      "distance_to_highway": 3.5,
+      "distance_to_city_center": 7.5,
+      "school_count": 2,
+      "hospital_count": 1,
+      "park_area": 1500.0,
+      "road_density": 0.5,
+      "public_transport_access": 0.7,
+      "crime_rate": 0.03,
+      "employment_rate": 0.90
+    }
+  ],
+  "prices": [
+    {
+      "grid_cell_id": "TOKYO_001",
+      "assessment_date": "2023-01-01",
+      "price": 1000000
+    },
+    {
+      "grid_cell_id": "TOKYO_002",
+      "assessment_date": "2023-01-01",
+      "price": 850000
+    },
+    {
+      "grid_cell_id": "TOKYO_003",
+      "assessment_date": "2023-01-01",
+      "price": 1500000
+    },
+    {
+      "grid_cell_id": "TOKYO_001",
+      "assessment_date": "2023-04-01",
+      "price": 1020000
+    },
+    {
+      "grid_cell_id": "TOKYO_002",
+      "assessment_date": "2023-04-01",
+      "price": 860000
+    }
+  ]
+}
