@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Brain, Play, Settings, TrendingUp } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 import { Dataset, ModelType, ModelRun } from '../types';
 import { apiClient } from '../lib/api';
 
@@ -47,25 +48,21 @@ export function ModelTraining() {
   }, []);
 
   const fetchDatasets = async () => {
-    try {
-      const data = await apiClient.getDatasets();
-      // Filter only ready datasets
-      const readyDatasets = (data || []).filter((ds: Dataset) => ds.status === 'ready');
-      setDatasets(readyDatasets);
-    } catch (error) {
-      console.error('Error fetching datasets:', error);
-      setDatasets([]);
-    }
+    const { data } = await supabase
+      .from('datasets')
+      .select('*')
+      .eq('status', 'ready')
+      .order('created_at', { ascending: false });
+    setDatasets(data || []);
   };
 
   const fetchRecentRuns = async () => {
-    try {
-      const data = await apiClient.getModelRuns({ limit: 5 });
-      setRecentRuns(data || []);
-    } catch (error) {
-      console.error('Error fetching recent runs:', error);
-      setRecentRuns([]);
-    }
+    const { data } = await supabase
+      .from('model_runs')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(5);
+    setRecentRuns(data || []);
   };
 
   const handleTrainModel = async () => {
@@ -78,11 +75,18 @@ export function ModelTraining() {
 
     try {
       // Create model run record in database
-      const modelRun = await apiClient.createModelRun(
-        selectedModel,
-        selectedDataset,
-        hyperparameters
-      );
+      const { data: modelRun, error } = await supabase
+        .from('model_runs')
+        .insert({
+          model_type: selectedModel,
+          dataset_id: selectedDataset,
+          hyperparameters,
+          status: 'pending'
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
 
       // Call Flask backend to start actual training
       const trainingResponse = await apiClient.startTraining({
@@ -93,12 +97,7 @@ export function ModelTraining() {
         test_size: testSize
       });
 
-      const r2Score = trainingResponse.metrics.test_r2;
-      const scoreText = r2Score !== null && r2Score !== undefined 
-        ? r2Score.toFixed(4) 
-        : 'N/A';
-      
-      alert(`Model training completed successfully! R² Score: ${scoreText}`);
+      alert(`Model training completed successfully! R² Score: ${trainingResponse.metrics.test_r2.toFixed(4)}`);
 
       fetchRecentRuns();
     } catch (error) {

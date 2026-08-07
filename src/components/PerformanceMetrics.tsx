@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Activity, TrendingUp, Target, Clock, Award } from 'lucide-react';
-import { apiClient } from '../lib/api';
+import { supabase } from '../lib/supabase';
 import { ModelRun } from '../types';
 
 interface MetricCard {
@@ -20,7 +20,13 @@ export function PerformanceMetrics() {
 
   const fetchModelRuns = async () => {
     try {
-      const data = await apiClient.getModelRuns({ status: 'completed' });
+      const { data, error } = await supabase
+        .from('model_runs')
+        .select('*')
+        .eq('status', 'completed')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
       setModelRuns(data || []);
     } catch (error) {
       console.error('Error fetching model runs:', error);

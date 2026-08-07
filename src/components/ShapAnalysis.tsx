@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { BarChart3, Info, TrendingUp, TrendingDown, Play, Sparkles } from 'lucide-react';
+import { BarChart3, Info, TrendingUp, TrendingDown } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 import { ModelRun, ShapValue } from '../types';
-import { apiClient } from '../lib/api';
 
 interface FeatureImportance {
   feature_name: string;
@@ -15,7 +15,6 @@ export function ShapAnalysis() {
   const [shapValues, setShapValues] = useState<ShapValue[]>([]);
   const [featureImportance, setFeatureImportance] = useState<FeatureImportance[]>([]);
   const [loading, setLoading] = useState(false);
-  const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
     fetchModelRuns();
@@ -28,66 +27,52 @@ export function ShapAnalysis() {
   }, [selectedRun]);
 
   const fetchModelRuns = async () => {
-    try {
-      const data = await apiClient.getModelRuns({ status: 'completed' });
-      setModelRuns(data || []);
-    } catch (error) {
-      console.error('Error fetching model runs:', error);
-      setModelRuns([]);
-    }
+    const { data } = await supabase
+      .from('model_runs')
+      .select('*')
+      .eq('status', 'completed')
+      .order('created_at', { ascending: false });
+    setModelRuns(data || []);
   };
 
   const fetchShapValues = async () => {
-    if (!selectedRun) return;
-    
     setLoading(true);
     try {
-      const importance = await apiClient.getFeatureImportance(selectedRun);
-      
-      if (importance && importance.feature_importance) {
-        // Map to match the interface with correct field names
-        const mappedImportance = importance.feature_importance.map((item: any) => ({
-          feature_name: item.feature_name,
-          avg_shap_value: item.avg_importance, // Map avg_importance to avg_shap_value
-          count: item.sample_count
-        }));
-        setFeatureImportance(mappedImportance);
-      } else {
-        setFeatureImportance([]);
-      }
-      setShapValues([]);
-      
+      const { data, error } = await supabase
+        .from('shap_values')
+        .select('*')
+        .eq('model_run_id', selectedRun);
+
+      if (error) throw error;
+      setShapValues(data || []);
+
+      const featureMap = new Map<string, { sum: number; count: number }>();
+
+      data?.forEach((shap) => {
+        const existing = featureMap.get(shap.feature_name) || { sum: 0, count: 0 };
+        featureMap.set(shap.feature_name, {
+          sum: existing.sum + Math.abs(shap.shap_value),
+          count: existing.count + 1
+        });
+      });
+
+      const importance: FeatureImportance[] = Array.from(featureMap.entries())
+        .map(([feature_name, stats]) => ({
+          feature_name,
+          avg_shap_value: stats.sum / stats.count,
+          count: stats.count
+        }))
+        .sort((a, b) => b.avg_shap_value - a.avg_shap_value);
+
+      setFeatureImportance(importance);
     } catch (error) {
       console.error('Error fetching SHAP values:', error);
-      setFeatureImportance([]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleGenerateShapValues = async () => {
-    if (!selectedRun) return;
-    
-    setGenerating(true);
-    try {
-      await apiClient.generateShapValues(selectedRun);
-      // Fetch the generated SHAP values
-      await fetchShapValues();
-      alert('SHAP values generated successfully!');
-    } catch (error) {
-      console.error('Error generating SHAP values:', error);
-      alert(`Failed to generate SHAP values: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-  const maxImportance = Math.max(
-    ...featureImportance
-      .map(f => f.avg_shap_value)
-      .filter(v => v !== undefined && v !== null && !isNaN(v)),
-    1
-  );
+  const maxImportance = Math.max(...featureImportance.map(f => f.avg_shap_value), 1);
 
   return (
     <div className="space-y-6">
@@ -122,43 +107,12 @@ export function ShapAnalysis() {
         )}
 
         {!loading && selectedRun && featureImportance.length === 0 && (
-          <div className="animate-slide-up">
-            <div className="bg-gradient-to-br from-blue-50/80 to-indigo-50/80 backdrop-blur-sm rounded-2xl p-8 border-2 border-blue-300">
-              <div className="text-center">
-                <div className="relative inline-block mb-6">
-                  <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-2xl animate-glow" />
-                  <Play className="w-16 h-16 text-blue-500 mx-auto relative" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">Generate SHAP Analysis</h3>
-                <p className="text-gray-600 mb-6 max-w-md mx-auto leading-relaxed">
-                  Click the button below to calculate SHAP values and understand which features impact your model's predictions the most.
-                </p>
-                <button
-                  onClick={handleGenerateShapValues}
-                  disabled={generating}
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  {generating ? (
-                    <>
-                      <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
-                      <span>Calculating SHAP Values...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Play className="w-5 h-5" />
-                      <span>Generate SHAP Analysis</span>
-                      <Sparkles className="w-5 h-5" />
-                    </>
-                  )}
-                  {!generating && (
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/0 via-purple-400/0 to-blue-400/0 group-hover:from-blue-400/20 group-hover:via-purple-400/20 group-hover:to-blue-400/20 transition-all duration-500" />
-                  )}
-                </button>
-                <p className="mt-4 text-sm text-gray-500">
-                  This will analyze feature importance for all predictions in the dataset
-                </p>
-              </div>
-            </div>
+          <div className="text-center py-12">
+            <Info className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+            <p className="text-gray-500">No SHAP values found for this model run</p>
+            <p className="text-sm text-gray-400 mt-2">
+              SHAP values need to be calculated and stored during model training
+            </p>
           </div>
         )}
 
@@ -183,9 +137,7 @@ export function ShapAnalysis() {
                         <TrendingDown className="w-4 h-4 text-gray-400" />
                       )}
                       <span className="text-sm font-semibold text-gray-800">
-                        {feature.avg_shap_value !== undefined && feature.avg_shap_value !== null 
-                          ? feature.avg_shap_value.toFixed(4) 
-                          : 'N/A'}
+                        {feature.avg_shap_value.toFixed(4)}
                       </span>
                     </div>
                   </div>
@@ -193,14 +145,12 @@ export function ShapAnalysis() {
                     <div
                       className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg transition-all duration-500 group-hover:from-blue-600 group-hover:to-blue-700"
                       style={{
-                        width: `${feature.avg_shap_value && maxImportance ? (feature.avg_shap_value / maxImportance) * 100 : 0}%`
+                        width: `${(feature.avg_shap_value / maxImportance) * 100}%`
                       }}
                     />
                     <div className="absolute inset-0 flex items-center px-3">
                       <span className="text-xs font-medium text-gray-700 mix-blend-difference">
-                        {feature.avg_shap_value && maxImportance 
-                          ? ((feature.avg_shap_value / maxImportance) * 100).toFixed(1) 
-                          : '0'}% relative importance
+                        {((feature.avg_shap_value / maxImportance) * 100).toFixed(1)}% relative importance
                       </span>
                     </div>
                   </div>

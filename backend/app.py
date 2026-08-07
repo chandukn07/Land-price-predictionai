@@ -8,10 +8,6 @@ from routes.training import training_bp
 from routes.prediction import prediction_bp
 from routes.shap_analysis import shap_bp
 from routes.health import health_bp
-from routes.house_prices import house_prices_bp
-from routes.datasets import datasets_bp
-from routes.model_runs import model_runs_bp
-from routes.location_prediction import location_prediction_bp
 
 def create_app():
     """Application factory"""
@@ -32,13 +28,9 @@ def create_app():
     
     # Register blueprints
     app.register_blueprint(health_bp, url_prefix='/api')
-    app.register_blueprint(datasets_bp, url_prefix='/api/datasets')
-    app.register_blueprint(model_runs_bp, url_prefix='/api/model_runs')
     app.register_blueprint(training_bp, url_prefix='/api/training')
     app.register_blueprint(prediction_bp, url_prefix='/api/prediction')
     app.register_blueprint(shap_bp, url_prefix='/api/shap')
-    app.register_blueprint(house_prices_bp, url_prefix='/api/house_prices')
-    app.register_blueprint(location_prediction_bp, url_prefix='/api/location')
     
     # Error handlers
     @app.errorhandler(404)

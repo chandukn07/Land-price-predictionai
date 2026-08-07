@@ -8,19 +8,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from datetime import datetime
 import traceback
-import math
 
 training_bp = Blueprint('training', __name__)
-
-def sanitize_nan(obj):
-    """Convert NaN values to None for JSON serialization"""
-    if isinstance(obj, dict):
-        return {k: sanitize_nan(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
-        return [sanitize_nan(item) for item in obj]
-    elif isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
-        return None
-    return obj
 
 FEATURE_COLUMNS = [
     'building_density',
@@ -176,7 +165,7 @@ def start_training():
         return jsonify({
             'status': 'completed',
             'model_run_id': model_run_id,
-            'metrics': sanitize_nan(metrics),
+            'metrics': metrics,
             'samples': {
                 'train': len(X_train),
                 'test': len(X_test)

@@ -20,10 +20,3 @@ class Config:
     # Training
     RANDOM_STATE = 42
     MAX_WORKERS = 4
-    
-    # Google Maps API
-    GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY', 'AIzaSyCXMuWvccDLIA4PFfjcxgvloZcQrPDDfL4')
-    
-    # Feature Extraction
-    FEATURE_CACHE_DURATION = 3600  # 1 hour cache for API results
-    DEFAULT_SEARCH_RADIUS = 2000  # 2km radius for nearby places
